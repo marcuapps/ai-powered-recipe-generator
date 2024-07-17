@@ -2,7 +2,7 @@ import React from 'react';
 import './RecipePreview.css'; // Import the CSS file for styling
 
 const RecipePreview = ({ recipe }) => {
-  if (!recipe) {
+  if (recipe.length === 0) {
     return <div>No recipe to display</div>;
   }
 

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import RecipeForm from './components/RecipeForm/RecipeForm';
 import RecipePreview from './components/RecipePreview/RecipePreview';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
-  // const ingredients = "rice, chicken, broccoli, onion"
-  const ingredients = "pasta, eggs, bacon, parmesan cheese"
 
   const fetchRecipes = async (ingredients) => {
     try {
       const response = await axios.post('http://localhost:5001/api/recipes', { ingredients });
-      const responseContent = response.data.choices[0].message.content;
+      var responseContent = response.data.choices[0].message.content.trim();
+      responseContent = responseContent.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
       const recipe = JSON.parse(responseContent);
       setRecipes(recipe);
     } catch (error) {
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <h1>AI-Powered Recipe Generator</h1>
-      <button onClick={() => fetchRecipes(ingredients.split(','))}>Fetch recipe</button>
+      <RecipeForm onIngredientsSubmit={fetchRecipes} />
       <RecipePreview recipe={recipes} />
     </div>
   );

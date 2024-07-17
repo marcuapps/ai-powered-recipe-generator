@@ -23,12 +23,12 @@ const generateRecipe = async (req, res) => {
         },
       ],
       temperature: 1,
-      max_tokens: 256,
+      max_tokens: 512,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
     });
-    
+
     res.json(response);
   } catch (error) {
     console.error('Error fetching recipes:', error);
