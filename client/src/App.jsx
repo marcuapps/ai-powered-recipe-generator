@@ -39,17 +39,7 @@ const App = () => {
     setIsLoading(true);
     setError(null)
     try {
-      const response = await axios.post('http://localhost:5001/api/recipes', { ingredients });
-
-      // if (!response.ok) {
-      //   throw new Error('Network response was not ok');
-      // }
-
-      // const data = await response.json();
-      // if (data.error) {
-      //   throw new Error(data.error);
-      // }
-
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/recipes`, { ingredients });
       const responseContent = response.data.choices[0].message.content.trim().replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
       const recipe = JSON.parse(responseContent);
       setRecipes(recipe);
