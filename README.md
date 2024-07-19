@@ -48,6 +48,11 @@ npm install
 
 4. **Create a .env file in the server directory by copying env.example and putting your own OpenAI API key**
 
+```bash
+PORT=5001
+OPENAI_API_KEY=your-openai-api-key
+```
+
 5. **Start the server**
 
 ```bash
