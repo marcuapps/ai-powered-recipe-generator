@@ -33,17 +33,29 @@ const ErrorMessage = styled.p`
 const App = () => {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchRecipes = async (ingredients) => {
     setIsLoading(true);
+    setError(null)
     try {
       const response = await axios.post('http://localhost:5001/api/recipes', { ingredients });
-      var responseContent = response.data.choices[0].message.content.trim();
-      responseContent = responseContent.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok');
+      // }
+
+      // const data = await response.json();
+      // if (data.error) {
+      //   throw new Error(data.error);
+      // }
+
+      const responseContent = response.data.choices[0].message.content.trim().replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
       const recipe = JSON.parse(responseContent);
       setRecipes(recipe);
     } catch (error) {
       console.error('Error fetching recipes:', error);
+      setError(error.response ? error.response.data.error : 'Error: Unable to fetch recipe');
     } finally {
       setIsLoading(false);
     }
@@ -53,13 +65,9 @@ const App = () => {
     <AppWrapper>
       <Title>AI-Powered Recipe Generator</Title>
       <RecipeForm onIngredientsSubmit={fetchRecipes} />
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <RecipePreview isLoading={isLoading} recipe={recipes} />
     </AppWrapper>
-    // <div className="App">
-    //   <h1>AI-Powered Recipe Generator</h1>
-    //   <RecipeForm onIngredientsSubmit={fetchRecipes} />
-    //   <RecipePreview recipe={recipes} />
-    // </div>
   );
 };
 

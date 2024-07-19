@@ -32,7 +32,7 @@ const generateRecipe = async (req, res) => {
     res.json(response);
   } catch (error) {
     console.error('Error fetching recipes:', error);
-    res.status(500).json({ error: 'Error generating recipes' });
+    res.status(500).json({ error: 'Failed to fetch recipe. Please try again later.' });
   }
 };
 

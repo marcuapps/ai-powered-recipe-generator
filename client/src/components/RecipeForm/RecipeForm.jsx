@@ -40,7 +40,7 @@ const Error = styled.p`
 
 const RecipeForm = ({ onIngredientsSubmit }) => {
   const [ingredients, setIngredients] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const RecipeForm = ({ onIngredientsSubmit }) => {
     }
     onIngredientsSubmit(ingredients.split(',').map(ingredient => ingredient.trim()));
     setIngredients('');
-    setError('');
+    setError(null);
   };
 
   return (
