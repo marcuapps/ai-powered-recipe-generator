@@ -59,9 +59,6 @@ const RecipePreview = ({ isLoading, recipe }) => {
           <strong>Prep Time:</strong> {recipe.prepTime}
         </div>
         <div>
-          <strong>Cook Time:</strong> {recipe.cookTime}
-        </div>
-        <div>
           <strong>Difficulty:</strong> {recipe.difficulty}
         </div>
       </RecipeDetails>

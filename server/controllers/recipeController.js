@@ -6,7 +6,7 @@ const openai = new OpenAI({
 
 const generateRecipe = async (req, res) => {
   const { ingredients } = req.body;
-  const prompt = `Create a detailed recipe with the following ingredients: ${ingredients.join(', ')}. Please format the response as JSON with the following fields: { "title": "Recipe Title", "ingredients": ["ingredient1", "ingredient2", ...], "instructions": ["Step 1", "Step 2", ...], "prepTime": "15 mins", "cookTime": "30 mins", "difficulty": "Easy" }`;
+  const prompt = `Create a detailed recipe with the following ingredients: ${ingredients.join(', ')}. Please format the response as JSON with the following fields: { "title": "Recipe Title", "ingredients": ["ingredient1", "ingredient2", ...], "instructions": ["Step 1", "Step 2", ...], "prepTime": "prepTime", "difficulty": "Easy" }`;
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
